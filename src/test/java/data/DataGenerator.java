@@ -23,7 +23,7 @@ public class DataGenerator {
 
 
     public static UserInfo getUserInfo(boolean isBlocked) {
-        Faker faker = new Faker(new Locale("en"));
+        Faker faker = new Faker(new Locale("ru"));
         return new UserInfo(
                 faker.name().username(),
                 faker.internet().password(),

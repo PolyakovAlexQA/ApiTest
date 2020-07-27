@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static data.DataGenerator.newUser;
 
 public class ApiGetPostTest {
-    Faker faker = new Faker(new Locale("en"));
+    Faker faker = new Faker(new Locale("ru"));
 
 
     void loginForm(String login, String password) {
@@ -40,5 +40,26 @@ public class ApiGetPostTest {
         DataGenerator.UserInfo user = newUser(false);
         loginForm(faker.name().username(), faker.internet().password());
         $(withText("Неверно указан логин или пароль")).waitUntil(Condition.visible,15000);
+    }
+
+    @Test
+    public void shouldGetErrorIfUserBlocked() {
+        DataGenerator.UserInfo user = newUser( true);
+        loginForm(user.getLogin(), user.getPassword());
+        $(withText("Пользователь заблокирован")).waitUntil(Condition.visible, 15000);
+    }
+
+    @Test
+    public void shouldGetErrorIfInvalidLogin() {
+        DataGenerator.UserInfo user = newUser( true);
+        loginForm(faker.name().username(), user.getPassword());
+        $(withText("Неверно указан логин или пароль")).waitUntil(Condition.visible, 15000);
+    }
+
+    @Test
+    public void shouldGetErrorIfInvalidPassword() {
+        DataGenerator.UserInfo user = newUser( true);
+        loginForm(user.getLogin(), faker.internet().password());
+        $(withText("Неверно указан логин или пароль")).waitUntil(Condition.visible, 15000);
     }
 }
