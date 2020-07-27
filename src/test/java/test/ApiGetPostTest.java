@@ -4,11 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.github.javafaker.Faker;
 import data.DataGenerator;
 import org.junit.jupiter.api.Test;
-
 import java.util.Locale;
-
-
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
