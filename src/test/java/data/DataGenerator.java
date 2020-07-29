@@ -42,36 +42,36 @@ public class DataGenerator {
         private RegistrationInfo() {
         }
 
-        public static String userPassword(String Locale) {
+        public static String userPassword(String Locale) { // генерация пароля с помощью faker
             Faker faker = new Faker(new Locale(Locale));
             return faker.internet().password();
         }
 
-        public static String userName(String Locale) {
+        public static String userName(String Locale) { // генерация имени с помощью фейкер
             Faker faker = new Faker(new Locale(Locale));
             return faker.name().username();
         }
 
-        public static UserInfo generateUserInfo(String locale, boolean isBlocked) {
+        public static UserInfo generateUserInfo(String locale, boolean isBlocked) { // устанавливаем значение blocked при неверном имени и пароли которые мы сгенерирвали
             return new UserInfo(
                     userName(locale),
                     userPassword(locale),
-                    (isBlocked) ? "blocked" : "active");
+                    (isBlocked) ? "blocked" : "active"); // значение статуса при возвращаемых данных(true,false)
 
         }
 
-        public static UserInfo generateValidUserInfo(String locale, boolean isBlocked) {
-            UserInfo user = generateUserInfo(locale, isBlocked);
+        public static UserInfo generateValidUserInfo(String locale, boolean isBlocked) { // создаем статический метод
+            UserInfo user = generateUserInfo(locale, isBlocked); // берем данные  с класса UserInfo присваеваем значение blocked
             setUpUser(user);
-            return user;
+            return user; // возвращаем тело
         }
 
-        public static UserInfo generateInvalidLoginUserInfo(String locale, boolean isBlocked) {
+        public static UserInfo generateInvalidLoginUserInfo(String locale, boolean isBlocked) { // метод невалидных значений Логина
             String password = userPassword(locale);
-            UserInfo user = new UserInfo(
-                    "vasya",
-                    password,
-                    (isBlocked) ? "blocked" : "active");
+            UserInfo user = new UserInfo( // берем данные с класса UserInfo
+                    "vasya",// присваеваем им логин vasya
+                    password, //генерируем пароль автоматически
+                    (isBlocked) ? "blocked" : "active"); // статус
             setUpUser(user);
             return new UserInfo(
                     "petya",
@@ -79,7 +79,7 @@ public class DataGenerator {
                     (isBlocked) ? "blocked" : "active");
         }
 
-        public static UserInfo generateInvalidPasswordUserInfo(String locale, boolean isBlocked) {
+        public static UserInfo generateInvalidPasswordUserInfo(String locale, boolean isBlocked) { // метод невалидных значений пароля
             String login = userName(locale);
             UserInfo user = new UserInfo(
                     login,
