@@ -1,4 +1,5 @@
 package data;
+
 import com.github.javafaker.Faker;
 import domain.UserInfo;
 import io.restassured.builder.RequestSpecBuilder;
@@ -6,8 +7,6 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import lombok.Value;
-
 
 import java.util.Locale;
 
@@ -57,7 +56,6 @@ public class DataGenerator {
                     userName(locale),
                     userPassword(locale),
                     (isBlocked) ? "blocked" : "active"); // значение статуса при возвращаемых данных(true,false)
-
         }
 
         public static UserInfo generateValidUserInfo(String locale, boolean isBlocked) { // создаем статический метод
